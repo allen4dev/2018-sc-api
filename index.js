@@ -1,8 +1,8 @@
 const http = require('http');
 
-const server = http.createServer(function(req, res) {
-  res.end('Starting the API');
-});
+const app = require('./server');
+
+const server = http.createServer(app);
 
 server.listen(8080, () => {
   console.log('Server running in PORT: ', 8080);
