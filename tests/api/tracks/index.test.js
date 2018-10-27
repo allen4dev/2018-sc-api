@@ -1,17 +1,17 @@
 const request = require('supertest'); // eslint-disable-line
+const mongoose = require('mongoose');
 
 const app = require('../../../server');
 
-describe('tracks', () => {
-  it('should return a json with a message of Tracks router', done => {
-    request(app)
-      .get('/api/tracks')
-      .expect(200)
-      .expect(res => {
-        const expected = { message: 'Tracks router' };
+const Track = mongoose.model('Track');
 
-        expect(res.body).toEqual(expected);
-      })
-      .end(done);
+describe('tracks', () => {
+  it('should return a json with a message of Tracks router', () => {
+    const track = { name: 'My awesome Track' };
+
+    return request(app)
+      .post('/api/tracks')
+      .send({ name: track.name })
+      .expect(201);
   });
 });

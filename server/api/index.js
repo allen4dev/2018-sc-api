@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const tracks = require('./tracks');
+const tracks = require('./tracks/router');
 
 const router = Router();
 
