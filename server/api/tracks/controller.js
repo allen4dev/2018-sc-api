@@ -7,10 +7,10 @@ exports.show = function fetchTrack(req, res, next) {
 };
 
 exports.create = function saveTrack(req, res, next) {
-  const { name } = req.body;
-  const track = new Track({ name });
+  const { track } = req.body;
+  const record = new Track(track);
 
-  track
+  record
     .save()
     .then(created => {
       res.status(201).send({ track: created });

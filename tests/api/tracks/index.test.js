@@ -15,7 +15,7 @@ describe('tracks', () => {
 
     return request(app)
       .post('/api/tracks')
-      .send({ name: track.name })
+      .send({ track })
       .expect(201)
       .expect(res => {
         const created = res.body.track;
