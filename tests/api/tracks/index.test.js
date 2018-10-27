@@ -6,12 +6,22 @@ const app = require('../../../server');
 const Track = mongoose.model('Track');
 
 describe('tracks', () => {
-  it('should return a json with a message of Tracks router', () => {
+  beforeEach(done => {
+    Track.remove({}).then(() => done());
+  });
+
+  it('should create a dummie track', () => {
     const track = { name: 'My awesome Track' };
 
     return request(app)
       .post('/api/tracks')
       .send({ name: track.name })
-      .expect(201);
+      .expect(201)
+      .expect(res => {
+        const created = res.body.track;
+
+        expect(created.name).toEqual(track.name);
+        expect(created._id).toBeDefined();
+      });
   });
 });
